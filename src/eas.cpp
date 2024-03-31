@@ -45,7 +45,9 @@ void Breadboard8::Assembler::parse_directives(std::string directive, std::vector
 {
     if (directive == ".org")
     {
-        counter = parse_number(exp[0]);
+        std::string adr = exp[0];
+        if (adr[0] == '#') adr = adr.substr(1);
+        counter = parse_number(adr);
     }
     else if (directive == ".byte")
     {
@@ -88,6 +90,7 @@ void Breadboard8::Assembler::assembleProgram(const std::string filePath)
 void Breadboard8::Assembler::interpretLine(std::string line)
 {
     if (line == std::string("")) return;
+    if (line[0] == ';') return;
 
     std::vector<std::string> ins = split(split(line, ';')[0], ' ');
     if (ins.size() < 1) return;
