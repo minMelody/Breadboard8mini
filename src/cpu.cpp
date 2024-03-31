@@ -6,7 +6,7 @@
 // Initialize memory with a bunch of no-ops
 Breadboard8::MEM::MEM()
 {
-	data.fill(opcodes::NOP);
+	data.fill(0x00);
 }
 
 // Load a program in memory
@@ -66,39 +66,39 @@ void Breadboard8::CPU::Execute(MEM& ram)
 
 	switch (IR & 0xF0)
 	{
-		case opcodes::NOP:
+		case 0x00:
 			break;
-		case opcodes::LDA:
+		case 0x10:
 			A = ram[IR & 0x0F];
 			break;
-		case opcodes::ADD:
+		case 0x20:
 			B = ram[IR & 0x0F];
 			A = Adder(A, B, C, Z);
 			break;
-		case opcodes::SUB:
+		case 0x30:
 			B = ram[IR & 0x0F];
 			A = Adder(A, -B, C, Z);
 			break;
-		case opcodes::STA:
+		case 0x40:
 			ram[IR & 0x0F] = A;
 			break;
-		case opcodes::LDI:
+		case 0x50:
 			A = IR & 0x0F;
 			break;
-		case opcodes::JMP:
+		case 0x60:
 			PC = IR & 0x0F;
 			break;
-		case opcodes::JC:
+		case 0x70:
 			PC = C ? (IR & 0x0F) : PC;
 			break;
-		case opcodes::JZ:
+		case 0x80:
 			PC = Z ? (IR & 0x0F) : PC;
 			break;
-		case opcodes::OUT:
+		case 0xE0:
 			OUT = A;
 			OE = true;
 			break;
-		case opcodes::HLT:
+		case 0xF0:
 			HALT = true;
 			break;
 		default:
