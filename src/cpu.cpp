@@ -3,6 +3,8 @@
 
 #include "cpu.h"
 
+// ===== MEM =====
+
 // Initialize memory with a bunch of no-ops
 Breadboard8::MEM::MEM()
 {
@@ -19,7 +21,6 @@ Breadboard8::MEM::MEM(T... prg)
 		i++;
 	}
 }
-
 // Load a program in memory
 Breadboard8::MEM::MEM(uint8_t prog[MAX_SIZE])
 {
@@ -38,6 +39,7 @@ uint8_t& Breadboard8::MEM::operator[] (uint8_t address) {
 	return data[address];
 }
 
+// ===== CPU =====
 
 void Breadboard8::CPU::Reset()
 {
@@ -62,7 +64,7 @@ void Breadboard8::CPU::Execute(MEM& ram)
 	IR = ram[PC];
 
 	PC++; // Increment the program counter
-	PC %= ram.MAX_SIZE; // Keeps it from overflowing, Eater's program counter was only 4 bits long
+	PC %= ram.MAX_SIZE; // Keep it from overflowing, Eater's program counter was only 4 bits long
 
 	switch (IR & 0xF0)
 	{

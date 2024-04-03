@@ -9,5 +9,5 @@ count_down:
   OUT
   JZ  count_up
   JMP count_down
-.org $f
-  .byte 5
+.org $f      ; sets the assembler's program counter to 15
+  .byte $05  ; writes an hexadecimal number to the current address

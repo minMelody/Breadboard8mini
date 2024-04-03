@@ -12,16 +12,16 @@ namespace Breadboard8
 		Assembler(MEM* prg);
 		// Assembles a source file then links the symbol table, results can be loaded immediately or saved as a .bin file
 		void assemble_program(const std::string filePath);
-		void parse_tokens(std::string line);
+		// Assemble one line at a time.
+		void parse_line(std::string line);
+		// Linker.
+		// Writes labels addresses in place of their mnemonics.
 		void link_symbols();
 	protected:
 		void write_instruction(uint8_t opcode, std::string data);
 		void write_values(uint8_t start_adr, std::vector<std::string> values);
-		void parse_directives(std::string directive, std::vector<std::string>  exp);
-		bool parse_number(std::string str, uint8_t* val);
-		bool parse_number(std::string str, unsigned int* val);
-		unsigned int counter = 0;
-		MEM* prg = nullptr;
+		uint8_t counter = 0;
+		MEM* prg = nullptr;	// Points to the program.
 		struct Symbol
 		{
 			std::uint8_t address; // the symbol's address
