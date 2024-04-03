@@ -55,7 +55,7 @@ int main(int argc, const char* argv[])
 	{
 		// Load program from source file
 		Assembler beasm{ &ram };
-		beasm.assembleProgram(PROGRAM_PATH);
+		beasm.assemble_program(PROGRAM_PATH);
 	}
 	CPU cpu{};
 	cpu.Reset();

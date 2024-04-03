@@ -1,13 +1,13 @@
   LDI 0
-;count_up
+count_up:
   OUT
   ADD $f
-  JC 5
-  JMP 1
-;count_down
+  JC  count_down
+  JMP count_up
+count_down:
   SUB $f
   OUT
-  JZ 1
-  JMP 5
+  JZ  count_up
+  JMP count_down
 .org $f
   .byte 5

@@ -17,6 +17,10 @@ Other numbers starting with a digit are decimal.
 ### Directives
 The `.org` and `.byte` directives are available to use.
 
+### Labels
+Labels must be defined on a new line and terminated by `:`<br>
+Reference a label by writing its name in place of a memory address.
+
 ## Flags
 ```
 Z    - Zero is set when an operation returns a zero

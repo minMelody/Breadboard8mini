@@ -1,14 +1,21 @@
-  LDA 14
-  SUB 12
-  JC 6
-  LDA 13
+top:
+  LDA product
+  ADD y
+  STA product
+  LDA x
+  SUB decrement
+  STA x
+  JZ  end
+  JMP top
+end:
+  LDA product
   OUT
   HLT
-  STA 14
-  LDA 13
-  ADD 15
-  STA 13
-  JMP 0
-  NOP
-  .byte 1 0 ; product
-  .byte 7 8 ; operands
+decrement:
+  1
+x:
+  7
+y:
+  6
+product:
+  0
