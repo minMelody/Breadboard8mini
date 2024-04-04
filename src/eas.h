@@ -20,6 +20,7 @@ namespace Breadboard8
 	protected:
 		void write_instruction(uint8_t opcode, std::string data);
 		void write_values(uint8_t start_adr, std::vector<std::string> values);
+		bool parse_number(std::string str, uint8_t* val);
 		uint8_t counter = 0;
 		MEM* prg = nullptr;	// Points to the program.
 		struct Symbol

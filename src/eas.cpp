@@ -18,7 +18,7 @@ std::vector<std::string> str_split(std::string str, char delimiter, bool keep_de
     return vec;
 }
 
-bool parse_number(std::string str, uint8_t* val)
+bool Breadboard8::Assembler::parse_number(std::string str, uint8_t* val)
 {
     uint8_t temp = *val;
     if (str[0] == '$') *val = stoi(str.substr(1), nullptr, 16);     // hexadecimal
@@ -67,6 +67,7 @@ void Breadboard8::Assembler::parse_line(std::string line)
 {
     if (line == std::string("")) return;
     std::vector<std::string> tokens;
+    std::transform(line.begin(), line.end(), line.begin(), std::tolower);
 
     // split line based on comments
     tokens = str_split(line, ';', true);
@@ -77,7 +78,6 @@ void Breadboard8::Assembler::parse_line(std::string line)
     if (tokens.size() < 1) return;
 
     std::string op = tokens[0];
-    std::transform(op.begin(), op.end(), op.begin(), std::tolower);
     std::vector<std::string> vals = std::vector<std::string>(tokens.begin() + 1, tokens.end());
     if (vals.size() == 0) vals = {"0"};
 
