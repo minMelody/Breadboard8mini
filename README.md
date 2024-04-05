@@ -20,7 +20,7 @@ These are the eleven opcodes Ben Eater built into his instruction set:
 
 \* only if jumping
 
-| Flag | Full Name                     | Behavior
+| Flag | Description                   | Behavior
 |------|-------------------------------|------------
 | Z    | Zero                          | Set when an operation returns a zero
 | C    | Carry                         | Set when an operation's result was larger than 255
