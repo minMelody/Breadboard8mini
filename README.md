@@ -1,6 +1,6 @@
 # An 8bit breadboard computer emulator
 Emulating Ben Eater's [8 bit breadboard computer](https://youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU&feature=shared).<br>
-The main program is able load a .bin file or assembly language source file.
+The main program is able to load a .bin file or assembly language source file.
 
 These are the eleven opcodes Ben Eater built into his instruction set:
 
