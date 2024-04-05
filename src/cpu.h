@@ -9,23 +9,25 @@ namespace Breadboard8
 	{
 	public:
 		// A list of all valid mnemonics in lowercase and the corresponding opcodes.
+		// Opcodes 0x9 through 0xD can easily be added here.
+		// Instruction operation is defined inside the CPU::Execute() implementation in 'cpu.cpp'.
 		const std::unordered_map<std::string, uint8_t> opcodes {
-			{"nop", 0x00},
-			{"lda", 0x10},
-			{"add", 0x20},
-			{"sub", 0x30},
-			{"sta", 0x40},
-			{"ldi", 0x50},
-			{"jmp", 0x60},
-			{"jc" , 0x70},
-			{"jz" , 0x80},
-			{"", 0x90},
-			{"", 0xA0},
-			{"", 0xB0},
-			{"", 0xC0},
-			{"", 0xD0},
-			{"out", 0xE0},
-			{"hlt", 0xF0},
+			{"nop", 0x0},
+			{"lda", 0x1},
+			{"add", 0x2},
+			{"sub", 0x3},
+			{"sta", 0x4},
+			{"ldi", 0x5},
+			{"jmp", 0x6},
+			{"jc" , 0x7},
+			{"jz" , 0x8},
+			{"", 0x9},
+			{"", 0xA},
+			{"", 0xB},
+			{"", 0xC},
+			{"", 0xD},
+			{"out", 0xE},
+			{"hlt", 0xF},
 		};
 
 		// Memory size can easily be upgraded by changing this value.

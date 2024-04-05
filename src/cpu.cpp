@@ -66,41 +66,42 @@ void Breadboard8::CPU::Execute(MEM& ram)
 	PC++; // Increment the program counter
 	PC %= ram.MAX_SIZE; // Keep it from overflowing, Eater's program counter was only 4 bits long
 
-	switch (IR & 0xF0)
+	// Instruction operations
+	switch (IR >> 4)
 	{
-		case 0x00:
+		case 0x0:	// NOP
 			break;
-		case 0x10:
+		case 0x1:	// LDA
 			A = ram[IR & 0x0F];
 			break;
-		case 0x20:
+		case 0x2:	// ADD
 			B = ram[IR & 0x0F];
 			A = Adder(A, B, C, Z);
 			break;
-		case 0x30:
+		case 0x3:	// SUB
 			B = ram[IR & 0x0F];
 			A = Adder(A, -B, C, Z);
 			break;
-		case 0x40:
+		case 0x4:	// STA
 			ram[IR & 0x0F] = A;
 			break;
-		case 0x50:
+		case 0x5:	// LDI
 			A = IR & 0x0F;
 			break;
-		case 0x60:
+		case 0x6:	// JMP
 			PC = IR & 0x0F;
 			break;
-		case 0x70:
+		case 0x7:	// JC
 			PC = C ? (IR & 0x0F) : PC;
 			break;
-		case 0x80:
+		case 0x8:	// JZ
 			PC = Z ? (IR & 0x0F) : PC;
 			break;
-		case 0xE0:
+		case 0xE:	// OUT
 			OUT = A;
 			OE = true;
 			break;
-		case 0xF0:
+		case 0xF:	// HLT
 			HALT = true;
 			break;
 		default:

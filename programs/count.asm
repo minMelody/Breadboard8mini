@@ -1,3 +1,5 @@
+; count up and down in a loop
+; incrementing and decrementing by 5
   LDI 0
 count_up:
   OUT

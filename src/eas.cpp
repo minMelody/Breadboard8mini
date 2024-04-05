@@ -136,7 +136,7 @@ void Breadboard8::Assembler::write_instruction(uint8_t opcode, std::string data)
             symbol_table.insert_or_assign(data, symbol);
         }
     }
-    (*prg)[counter] = opcode + (val & 0x0f);
+    (*prg)[counter] = (opcode << 4) + (val & 0x0f);
     counter++;
 }
 

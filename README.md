@@ -1,58 +1,75 @@
-# Description
+# An 8bit breadboard computer emulator
 Emulating Ben Eater's [8 bit breadboard computer](https://youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU&feature=shared).<br>
-The main program can load a .bin files or assembly language source file.<br>
-Memory can easily be expanded and more opcodes can be added.
+The main program is able load a .bin file or assembly language source file.
 
-## Assembler
-The assembler can execute at the start of the program by entering a source file. It uses a simplified version of [vasm oldstyle syntax](http://www.ibaug.de/vasm/doc/vasm.pdf#43) - used a lot in his 6502 playlist.
+These are the eleven opcodes Ben Eater built into his instruction set:
 
-### Comments
-Anything following `;` is ignored.
+| Opcode | Mnemonic | Description                                                     | Affect Flags | Affect Registers |
+|--------|----------|-----------------------------------------------------------------|--------------|------------------|
+| 0      | NOP      | Do nothing for one instruction cycle                            | none         | none             |
+| 1      | LDA      | Loads contents of a memory address to the A register            | none         | A                |
+| 2      | ADD      | Adds the A register with the contents of a memory address       | C Z          | B A              |
+| 3      | SUB      | Substracts the A register with the contents of a memory address | C Z          | B A              |
+| 4      | STA      | Stores the A register at a memory address                       | none         | none             |
+| 5      | LDI      | Loads a 4 bit immediate value to the A register                 | none         | A                |
+| 6      | JMP      | Unconditionnal jump to a memory address                         | none         | PC               |
+| 7      | JC       | Jumps to a memory address if Carry flag is set                  | none         | PC *             |
+| 8      | JZ       | Jumps to a memory address if Zero flag is set                   | none         | PC *             |
+| E      | OUT      | Loads the A register onto the OUT register and sets the OE flag | OE           | OUT              |
+| F      | HLT      | Sets the HALT flag, used to halt program execution              | HALT         | none             |
 
-### Numbers
-Write hexadecimal numbers using prefix `$`, binary numbers with prefix `%`, octal base use prefix `@`.
-A digit followed by a `#` can be used to define an arbitrary base between 2 and 9.<br>
-Other numbers starting with a digit are decimal.
+\* only if jumping
 
-### Directives
-The `.org` and `.byte` directives are available to use.
+| Flag | Full Name                     | Behavior
+|------|-------------------------------|------------
+| Z    | Zero                          | Set when an operation returns a zero
+| C    | Carry                         | Set when an operation's result was larger than 255
+| HALT | Halt                          | Set by a HLT instruction, only cleared on reset
+| OE   | Output Enabled                | Set by an OUT instruction and cleared by the next instruction
+| IIE  | Invalid Instruction Exception | Indicates the byte read by the cpu was not a valid instruction
+
+Memory can easily be expanded and more opcodes can be added by modifying `cpu.h` and `cpu.cpp`.
+
+## Assembler Syntax
+The assembler is based off a simplified version of [Volker Barthelmann's vasm oldstyle syntax module](http://www.ibaug.de/vasm/doc/vasm.pdf#43) - used a lot in Eater's 6502 videos.<br>
+As of now it implements labels as well as the `.org` and `.byte` directives.<br>
+Anything following `;` is ignored and considered a comment.
+
+### Number format
+Numbers preceded by `$` are hexadecimal, while a preceding `%` designate a binary number.<br>
+The assembler also accepts octal values preceded by `@`, and a digit followed by a `#` can be used to define an arbitrary base between 2 and 9.<br>
+Bare numbers default to decimal.
 
 ### Labels
-Labels must be defined on a new line and terminated by `:`<br>
-Reference a label by writing its name in place of a memory address.
+Labels are symbols that refer to a memory address using a user-defined mnemonic. They must be defined on a new line and terminated by `:`<br>
+Refer to a label by writing its name in lieu of a memory address.
 
-## Flags
+*The assembler is case insensitive, meaning a lower case symbol is identical to upper case.*
+
+### Directives
+The `.org` and `.byte` directives are available to use:
+
+|            Usage           | Description
+|----------------------------|--------------
+| .org [#]adr                | Sets the base address for the following code block. Accepts an optional `#`
+| .byte int1[ int2...]       | Writes the following numbers, separated by a blank space, into successive bytes of memory
+
+An alternative to the `.byte` directive is writing decimal integers with no symbol/mnemonic preceding them:
 ```
-Z    - Zero is set when an operation returns a zero
-C    - Carry is set when an operation's result was larger than 255
-HALT - Halt is set by a HLT instruction, only cleared on reset
-OE   - Output Enabled is set by an OUT instruction and cleared by the next instruction
-IIE  - Invalid Instruction Exception indicates the byte read by the cpu was not a valid instruction
+.byte 8   ; Writes an 8 at the current memory location
+8         ; Also writes an 8
+
+$F        ; Will not work
+.byte $F  ; But this will
 ```
 
-## Instruction set
-| Opcode | Mnemonic | Description 
-|--------|----------|----------------------
-| 0      | NOP      | Do nothing for one instruction cycle
-| 1      | LDA      | Loads contents of a memory address to the A register
-| 2      | ADD      | Adds the A register with the contents of a memory address
-| 3      | SUB      | Substracts the A register with the contents of a memory address
-| 4      | STA      | Stores the A register at a memory address
-| 5      | LDI      | Loads a 4 bit immediate value to the A register
-| 6      | JMP      | Unconditionnal jump to a memory address
-| 7      | JC       | Jumps to a memory address if Carry flag is set
-| 8      | JZ       | Jumps to a memory address if Zero flag is set
-| E      | OUT      | Loads the A register onto the OUT register and sets the OE flag - main program then prints it
-| F      | HLT      | Sets the HALT flag, used to halt program execution
-
-
-### Example program
-A simple program adding two numbers - 28 and 14 - that are located at the end of memory would look something like this:
+### Example program: adding 28 and 14
+A simple program adding two numbers that are located at the end of memory would look something like this:
 ```
-LDA $e
-ADD $f
-OUT
-HLT
+  lda $e
+  add $f
+  out
+  hlt
 .org $e
-.byte 28 14
+  .byte 28 14
 ```
