@@ -1,6 +1,8 @@
 # An 8bit breadboard computer emulator
 Emulating Ben Eater's [8 bit breadboard computer](https://youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU&feature=shared).<br>
-The main program is able to load a .bin file or assembly language source file.
+Build the project by running `./build.sh`, this will create a `./main` binary using g++.
+
+The main program is able to load a .bin file or assembly language source file, either from command line argument or from user input.
 
 These are the eleven opcodes Ben Eater built into his instruction set:
 
@@ -63,7 +65,7 @@ $F        ; Will not work
 .byte $F  ; But this will
 ```
 
-### Example program: adding 28 and 14
+## Example program: adding 28 and 14
 A simple program adding two numbers that are located at the end of memory would look something like this:
 ```
   lda $e

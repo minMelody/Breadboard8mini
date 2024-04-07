@@ -12,7 +12,6 @@ void read_binary(std::string path, MEM& prg)
 	std::ifstream f(path, std::ios::binary | std::ios::ate);
 	if (f.is_open())
 	{
-		f.seekg(0, std::ios_base::end);
 		unsigned long fileSize = f.tellg();
 		unsigned long address = 0x00;
 		unsigned char byte = 0x00;

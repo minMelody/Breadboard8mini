@@ -67,7 +67,7 @@ void Breadboard8::Assembler::parse_line(std::string line)
 {
     if (line == std::string("")) return;
     std::vector<std::string> tokens;
-    std::transform(line.begin(), line.end(), line.begin(), std::tolower);
+    std::transform(line.begin(), line.end(), line.begin(), ::tolower);
 
     // split line based on comments
     tokens = str_split(line, ';', true);

@@ -1,4 +1,5 @@
 #pragma once
+#include <cstdint>
 #include <array>
 #include <string>
 #include <unordered_map>
@@ -38,7 +39,6 @@ namespace Breadboard8
 		// Load a program in memory.
 		MEM(uint8_t prog[MAX_SIZE]);
 		template<typename... T>
-		// Load a program in memory.
 		MEM(T... prg);
 
 		~MEM();
