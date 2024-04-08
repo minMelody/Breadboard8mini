@@ -20,19 +20,20 @@ std::vector<std::string> str_split(std::string str, char delimiter, bool keep_de
 
 bool Breadboard8::Assembler::parse_number(std::string str, uint8_t* val)
 {
-    uint8_t temp = *val;
-    if (str[0] == '$') *val = stoi(str.substr(1), nullptr, 16);     // hexadecimal
-    else if (str[0] == '@') *val = stoi(str.substr(1), nullptr, 8); // octal
-    else if (str[0] == '%') *val = stoi(str.substr(1), nullptr, 2); // binary
-    else if (str[1] == '#') // arbitrary base
+    bool is_number = false;
+    if (str[1] == '#') // arbitrary base
     {
         std::string base = "";
         base += str[0];
         *val = stoi(str.substr(2), nullptr, stoi(base));
+        is_number = true;
     }
-    else if (isdigit(str[0])) *val = stoi(str); // decimal
+    else if (isdigit(str[0])) { *val = stoi(str); is_number = true; } // decimal
+    else if (str[0] == '$') { *val = stoi(str.substr(1), nullptr, 16); is_number = true; } // hexadecimal
+    else if (str[0] == '%') { *val = stoi(str.substr(1), nullptr, 2); is_number = true; }  // binary
+    else if (str[0] == '@') { *val = stoi(str.substr(1), nullptr, 8); is_number = true; }  // octal
 
-    return (temp != *val);
+    return is_number;
 }
 
 Breadboard8::Assembler::Assembler(MEM* prg)
