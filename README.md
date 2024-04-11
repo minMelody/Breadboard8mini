@@ -2,8 +2,13 @@
 Emulating Ben Eater's [8 bit breadboard computer](https://youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU&feature=shared).<br>
 Build the project by running `./build.sh`, this will create a `./main` binary using g++.
 
-The main program is able to load a .bin file or assembly language source file, either from command line argument or from user input.
+The main program is capable to load .bin and .out binary files as well as assembly language source files, either from command line arguments or from user input.
 
+Run the program using `./main <file path> <clock speed in hertz>`
+
+![screenshot](https://github.com/minMelody/Breadboard8/blob/main/screenshot.png)
+
+## The CPU
 These are the eleven opcodes Ben Eater built into his instruction set:
 
 | Opcode | Mnemonic | Description                                                     | Affect Flags | Affect Registers |
