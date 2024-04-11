@@ -7,6 +7,8 @@ The main program is capable to load .bin and .out binary files as well as assemb
 Run the program using `./main <file path> <clock speed in hertz>`
 
 ![screenshot](https://github.com/minMelody/Breadboard8/blob/main/screenshot.png)
+![screenshot1](https://github.com/minMelody/Breadboard8/blob/main/screenshot1.png)
+
 
 ## The CPU
 These are the eleven opcodes Ben Eater built into his instruction set:
