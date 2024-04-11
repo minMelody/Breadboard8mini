@@ -45,6 +45,7 @@ void Breadboard8::CPU::Reset()
 {
 	PC = A = B = OUT = 0;
 	Z = C = HALT = OE = IIE = false;
+	cycles = 0;
 }
 
 uint8_t Breadboard8::CPU::Adder(uint8_t A, uint8_t B, bool& C, bool& Z)
@@ -65,6 +66,11 @@ void Breadboard8::CPU::Execute(MEM& ram)
 
 	PC++; // Increment the program counter
 	PC %= ram.MAX_SIZE; // Keep it from overflowing, Eater's program counter was only 4 bits long
+
+	// Almost all instructions take 5 clock cycles:
+	// 2 cycles FETCH sequence + 3 cycles execution.
+	// The HLT instruction is quicker than the others.
+	cycles = 5;
 
 	// Instruction operations
 	switch (IR >> 4)
@@ -102,6 +108,7 @@ void Breadboard8::CPU::Execute(MEM& ram)
 			OE = true;
 			break;
 		case 0xF:	// HLT
+			cycles = 3;
 			HALT = true;
 			break;
 		default:

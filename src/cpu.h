@@ -62,6 +62,8 @@ namespace Breadboard8
 
 			void Reset();
 			void Execute(MEM& ram);
+			
+			int cycles; // Numbers of cycles left to execute current instruction.
 	protected:
 		uint8_t Adder(uint8_t A, uint8_t B, bool& C, bool& Z);
 	};

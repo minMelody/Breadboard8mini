@@ -82,6 +82,3 @@ A simple program adding two numbers that are located at the end of memory would 
 .org $e
   .byte 28 14
 ```
-
-## Current Limitations
-The clock speed is not 1:1 with the physical 8bit breadboard computer, due to the emulator executing an instruction in one cycle.

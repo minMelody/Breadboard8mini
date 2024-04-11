@@ -102,10 +102,15 @@ int main(int argc, const char* argv[])
 	// Execute until the HALT flag is set
 	while (!cpu.HALT)
 	{
-		cpu.Execute(ram);
-		if (cpu.OE) printf("%d \n", cpu.OUT);
-		if (cpu.IIE) continue; // Ignore
+		if (cpu.cycles == 0)
+		{
+			cpu.Execute(ram);
+			if (cpu.OE) printf("%d \n", cpu.OUT);
+			if (cpu.IIE) continue; // Ignore
+		}
+
 		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / clk.frequency));
+		cpu.cycles--;
 	}
 
 	busy_thread.~thread();
