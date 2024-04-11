@@ -7,8 +7,8 @@ The main program is capable to load .bin and .out binary files as well as assemb
 Run the program using `./main <file path> <clock speed in hertz>`
 
 ![screenshot](https://github.com/minMelody/Breadboard8/blob/main/screenshot.png)
-![screenshot1](https://github.com/minMelody/Breadboard8/blob/main/screenshot1.png)
 
+![screenshot1](https://github.com/minMelody/Breadboard8/blob/main/screenshot1.png)
 
 ## The CPU
 These are the eleven opcodes Ben Eater built into his instruction set:
@@ -82,3 +82,6 @@ A simple program adding two numbers that are located at the end of memory would 
 .org $e
   .byte 28 14
 ```
+
+## Current Limitations
+The clock speed is not 1:1 with the physical 8bit breadboard computer, due to the emulator executing an instruction in one cycle.
