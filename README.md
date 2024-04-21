@@ -1,4 +1,4 @@
-# An 8bit breadboard computer emulator
+# A simple 8bit breadboard computer emulator
 Emulating Ben Eater's [8 bit breadboard computer](https://youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU&feature=shared).<br>
 Build the project by running `./build.sh`, this will create a `./main` binary using g++.
 
@@ -6,9 +6,9 @@ The main program is capable to load .bin and .out binary files as well as assemb
 
 Run the program using `./main <file path> <clock speed in hertz>`
 
-![screenshot](https://github.com/minMelody/Breadboard8/blob/main/screenshot.png)
+![screenshot](https://github.com/minMelody/Breadboard8mini/blob/main/screenshot.png)
 
-![screenshot1](https://github.com/minMelody/Breadboard8/blob/main/screenshot1.png)
+![screenshot1](https://github.com/minMelody/Breadboard8mini/blob/main/screenshot1.png)
 
 ## The CPU
 These are the eleven opcodes Ben Eater built into his instruction set:
