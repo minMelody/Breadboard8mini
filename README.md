@@ -22,12 +22,12 @@ These are the eleven opcodes Ben Eater built into his instruction set:
 | 4      | STA      | Stores the A register at a memory address                       | none         | none             |
 | 5      | LDI      | Loads a 4 bit immediate value to the A register                 | none         | A                |
 | 6      | JMP      | Unconditionnal jump to a memory address                         | none         | PC               |
-| 7      | JC       | Jumps to a memory address if Carry flag is set                  | none         | PC *             |
-| 8      | JZ       | Jumps to a memory address if Zero flag is set                   | none         | PC *             |
+| 7      | JC       | Jumps to a memory address if Carry flag is set                  | none         | PC ¹             |
+| 8      | JZ       | Jumps to a memory address if Zero flag is set                   | none         | PC ¹             |
 | E      | OUT      | Loads the A register onto the OUT register and sets the OE flag | OE           | OUT              |
 | F      | HLT      | Sets the HALT flag, used to halt program execution              | HALT         | none             |
 
-\* only if jumping
+¹ Only if jumping
 
 | Flag | Description                   | Behavior
 |------|-------------------------------|------------
@@ -82,3 +82,6 @@ A simple program adding two numbers that are located at the end of memory would 
 .org $e
   .byte 28 14
 ```
+
+# More
+A more in-depth emulator, with TUI, can be found [here](https://github.com/minMelody/Breadboard8).
