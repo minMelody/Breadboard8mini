@@ -40,7 +40,7 @@ These are the eleven opcodes Ben Eater built into his instruction set:
 Memory can easily be expanded and more opcodes can be added by modifying `cpu.h` and `cpu.cpp`.
 
 ## Assembler Syntax
-The assembler is based off a simplified version of [Volker Barthelmann's vasm oldstyle syntax module](http://www.ibaug.de/vasm/doc/vasm.pdf#43) - used a lot in Eater's 6502 videos.<br>
+The assembler is a very simplified version of [Volker Barthelmann's vasm oldstyle syntax module](http://www.ibaug.de/vasm/doc/vasm.pdf#43) - used a lot in Eater's 6502 videos.<br>
 As of now it implements labels as well as the `.org` and `.byte` directives.<br>
 Anything following `;` is ignored and considered a comment.
 
@@ -84,4 +84,4 @@ A simple program adding two numbers that are located at the end of memory would 
 ```
 
 # More
-A more in-depth emulator, with TUI, can be found [here](https://github.com/minMelody/Breadboard8).
+A more in-depth emulator, with TUI, can be found at [minMelody/Breadboard8](https://github.com/minMelody/Breadboard8).
